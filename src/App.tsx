@@ -1,24 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Paper, Divider, Button, List, Tabs, Tab } from "@mui/material";
+import { AddField } from "./components/AddField";
+import { Item } from "./components/Item";
+
+import { reducer } from "./store/reducers";
+import { addTodoAction, toggleCompleteAction } from "./store/actions";
+
+const initialState = {
+  todo: {
+    items: [],
+    isAllTodoMarked: false,
+  },
+};
 
 function App() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  const todo = state.todo;
+
+  const addTodo = (text: string, completed: boolean) => {
+    dispatch(addTodoAction(text, completed));
+  };
+
+  const toggleComplete = (id: number) => {
+    dispatch(toggleCompleteAction(id));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Paper className="wrapper">
+        <Paper className="header" elevation={0}>
+          <h4>Список задач</h4>
+        </Paper>
+        <AddField addTodo={addTodo} />
+        <Divider />
+        <Tabs value={0}>
+          <Tab label="Все" />
+          <Tab label="Активные" />
+          <Tab label="Завершённые" />
+        </Tabs>
+        <Divider />
+        <List>
+          {todo.items.map((todo) => (
+            <Item toggleComplete={toggleComplete} key={todo.id} {...todo} />
+          ))}
+        </List>
+        <Divider />
+        <div className="check-buttons">
+          <Button>Отметить всё</Button>
+          <Button>Очистить</Button>
+        </div>
+      </Paper>
     </div>
   );
 }
