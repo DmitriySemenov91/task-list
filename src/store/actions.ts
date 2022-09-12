@@ -1,4 +1,8 @@
-import { TAddTodoAction, TToggleCompleteAction } from "./types";
+import {
+  TAddTodoAction,
+  TToggleCompleteAction,
+  TRemoveTodoAction,
+} from "./types";
 
 export const addTodoAction = (
   text: string,
@@ -13,5 +17,10 @@ export const addTodoAction = (
 
 export const toggleCompleteAction = (id: number): TToggleCompleteAction => ({
   type: "TOGGLE_COMPLETE",
+  payload: id,
+});
+
+export const removeTodoAction = (id: number): TRemoveTodoAction => ({
+  type: "REMOVE_TODO",
   payload: id,
 });

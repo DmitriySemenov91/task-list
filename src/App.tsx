@@ -4,7 +4,11 @@ import { AddField } from "./components/AddField";
 import { Item } from "./components/Item";
 
 import { reducer } from "./store/reducers";
-import { addTodoAction, toggleCompleteAction } from "./store/actions";
+import {
+  addTodoAction,
+  toggleCompleteAction,
+  removeTodoAction,
+} from "./store/actions";
 
 const initialState = {
   todo: {
@@ -26,6 +30,12 @@ function App() {
     dispatch(toggleCompleteAction(id));
   };
 
+  const removeTodo = (id: number) => {
+    if (window.confirm("Удалить задачу?")) {
+      dispatch(removeTodoAction(id));
+    }
+  };
+
   return (
     <div className="App">
       <Paper className="wrapper">
@@ -42,7 +52,12 @@ function App() {
         <Divider />
         <List>
           {todo.items.map((todo) => (
-            <Item toggleComplete={toggleComplete} key={todo.id} {...todo} />
+            <Item
+              removeTodo={removeTodo}
+              toggleComplete={toggleComplete}
+              key={todo.id}
+              {...todo}
+            />
           ))}
         </List>
         <Divider />

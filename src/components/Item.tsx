@@ -11,6 +11,7 @@ type TItemProps = {
   text: string;
   completed: boolean;
   toggleComplete: (id: number) => void;
+  removeTodo: (id: number) => void;
 };
 
 export const Item: React.FC<TItemProps> = ({
@@ -18,9 +19,14 @@ export const Item: React.FC<TItemProps> = ({
   text,
   completed,
   toggleComplete,
+  removeTodo,
 }) => {
   const handleCheckboxClick = () => {
     toggleComplete(id);
+  };
+
+  const handleRemoveClick = () => {
+    removeTodo(id);
   };
 
   return (
@@ -37,7 +43,7 @@ export const Item: React.FC<TItemProps> = ({
           <IconButton>
             <EditIcon style={{ fontSize: 20 }} />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleRemoveClick}>
             <DeleteOutlineIcon style={{ fontSize: 20 }} />
           </IconButton>
         </div>
