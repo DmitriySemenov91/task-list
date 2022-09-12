@@ -29,6 +29,14 @@ export function reducer(state: TState, action: TActions) {
           ),
         },
       };
+    case "REMOVE_TODO":
+      return {
+        ...state,
+        todo: {
+          ...state.todo,
+          items: state.todo.items.filter((todo) => todo.id !== action.payload),
+        },
+      };
     default:
       return state;
   }

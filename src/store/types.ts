@@ -24,4 +24,12 @@ export type TToggleCompleteAction = {
   payload: number;
 };
 
-export type TActions = TAddTodoAction | TToggleCompleteAction;
+export type TRemoveTodoAction = {
+  type: "REMOVE_TODO";
+  payload: number;
+};
+
+export type TActions =
+  | TAddTodoAction
+  | TToggleCompleteAction
+  | TRemoveTodoAction;
