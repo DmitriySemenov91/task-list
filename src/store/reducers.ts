@@ -37,6 +37,35 @@ export function reducer(state: TState, action: TActions) {
           items: state.todo.items.filter((todo) => todo.id !== action.payload),
         },
       };
+    case "REMOVE_ALL_TODO":
+      return {
+        ...state,
+        todo: {
+          ...state.todo,
+          items: [],
+        },
+      };
+    case "MARK_ALL_TODOS":
+      return {
+        ...state,
+        todo: {
+          ...state.todo,
+          isAllTodoMarked: true,
+          items: state.todo.items.map((todo) => ({ ...todo, completed: true })),
+        },
+      };
+    case "UNMARK_ALL_TODOS":
+      return {
+        ...state,
+        todo: {
+          ...state.todo,
+          isAllTodoMarked: false,
+          items: state.todo.items.map((todo) => ({
+            ...todo,
+            completed: false,
+          })),
+        },
+      };
     default:
       return state;
   }
