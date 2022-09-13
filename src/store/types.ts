@@ -29,7 +29,21 @@ export type TRemoveTodoAction = {
   payload: number;
 };
 
+export type TRemoveAllTodoAction = {
+  type: "REMOVE_ALL_TODO";
+};
+
+export type TMarkAllTodosAction = {
+  type: "MARK_ALL_TODOS";
+};
+
+export type TUnmarkAllTodosAction = {
+  type: "UNMARK_ALL_TODOS";
+};
 export type TActions =
   | TAddTodoAction
   | TToggleCompleteAction
-  | TRemoveTodoAction;
+  | TRemoveTodoAction
+  | TRemoveAllTodoAction
+  | TMarkAllTodosAction
+  | TUnmarkAllTodosAction;

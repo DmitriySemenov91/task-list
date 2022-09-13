@@ -8,6 +8,9 @@ import {
   addTodoAction,
   toggleCompleteAction,
   removeTodoAction,
+  removeAllTodoAction,
+  unmarkAllTodosAction,
+  markAllTodosAction,
 } from "./store/actions";
 
 const initialState = {
@@ -36,6 +39,18 @@ function App() {
     }
   };
 
+  const removeAllTodo = () => {
+    dispatch(removeAllTodoAction());
+  };
+
+  const markAllTodos = () => {
+    dispatch(markAllTodosAction());
+  };
+
+  const unmarkAllTodos = () => {
+    dispatch(unmarkAllTodosAction());
+  };
+
   return (
     <div className="App">
       <Paper className="wrapper">
@@ -62,8 +77,12 @@ function App() {
         </List>
         <Divider />
         <div className="check-buttons">
-          <Button>Отметить всё</Button>
-          <Button>Очистить</Button>
+          <Button
+            onClick={todo.isAllTodoMarked ? unmarkAllTodos : markAllTodos}
+          >
+            {todo.isAllTodoMarked ? "Снять отметки" : "Отметить всё"}
+          </Button>
+          <Button onClick={removeAllTodo}>Очистить</Button>
         </div>
       </Paper>
     </div>

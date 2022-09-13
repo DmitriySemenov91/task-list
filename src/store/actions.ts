@@ -2,6 +2,9 @@ import {
   TAddTodoAction,
   TToggleCompleteAction,
   TRemoveTodoAction,
+  TRemoveAllTodoAction,
+  TMarkAllTodosAction,
+  TUnmarkAllTodosAction,
 } from "./types";
 
 export const addTodoAction = (
@@ -23,4 +26,16 @@ export const toggleCompleteAction = (id: number): TToggleCompleteAction => ({
 export const removeTodoAction = (id: number): TRemoveTodoAction => ({
   type: "REMOVE_TODO",
   payload: id,
+});
+
+export const removeAllTodoAction = (): TRemoveAllTodoAction => ({
+  type: "REMOVE_ALL_TODO",
+});
+
+export const markAllTodosAction = (): TMarkAllTodosAction => ({
+  type: "MARK_ALL_TODOS",
+});
+
+export const unmarkAllTodosAction = (): TUnmarkAllTodosAction => ({
+  type: "UNMARK_ALL_TODOS",
 });
